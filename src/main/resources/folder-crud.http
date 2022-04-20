@@ -1,0 +1,36 @@
+## find all
+GET http://localhost:8080/folder
+Accept: application/json
+
+###
+
+## Find by ID
+GET http://localhost:8080/folder/1
+Accept: application/json
+
+###
+
+//beszúrás
+POST http://localhost:8080/folder
+Content-Type: application/json
+
+{
+  "folderName": "Szuper név",
+  "folderUrl": "Szuper URL"
+}
+###
+
+//módosítás
+PUT http://localhost:8080/folder
+Content-Type: application/json
+
+{
+  "id": 1,
+  "folderName": "TEST",
+  "folderUrl": "Szuper URL"
+}
+###
+
+## Delete by ID
+DELETE http://localhost:8080/folder/1
+Accept: application/json
