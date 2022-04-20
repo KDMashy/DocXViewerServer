@@ -1,6 +1,8 @@
 package docviewer.docxviewerserver.core.repository;
 
 import docviewer.docxviewerserver.core.entity.CoreEntity;
+import docviewer.docxviewerserver.document.entity.DocumentEntity;
+import docviewer.docxviewerserver.folder.entity.FolderEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -32,6 +34,32 @@ public abstract class CoreAbstractRepository <T extends CoreEntity> {
 
     public void delete(Long id) {
         entityManager.remove((findById(id)));
+    }
+
+    public void deleteFolderWContents(Long id){
+        FolderEntity entity = (FolderEntity) findById(id);
+        List<FolderEntity> entities = (List<FolderEntity>) findAll();
+        for (FolderEntity found : entities) {
+            String[] folderUrl = found.getFolderUrl().split("/");
+            for (String part : folderUrl) {
+                if (part.equals(entity.getFolderName())){
+                    delete(found.getId());
+                }
+            }
+        }
+        delete(id);
+    }
+
+    public void deleteDocumentsWFolder(String folderName){
+        List<DocumentEntity> entities = (List<DocumentEntity>) findAll();
+        for (DocumentEntity entity : entities) {
+            String[] docUrl = entity.getDocumentUrl().split("/");
+            for (String part : docUrl) {
+                if (part.equals(folderName)){
+                    delete(entity.getId());
+                }
+            }
+        }
     }
 
     public List<T> findAll() {

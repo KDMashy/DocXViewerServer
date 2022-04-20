@@ -1,27 +1,28 @@
 ## find all
-GET http://localhost:8080/folder
+GET http://localhost:8080/document
 Accept: application/json
 
 ###
 
 ## Find by ID
-GET http://localhost:8080/folder/1
+GET http://localhost:8080/document/1
 Accept: application/json
 
 ###
 
 //beszúrás
-POST http://localhost:8080/folder
+POST http://localhost:8080/document
 Content-Type: application/json
 
 {
-  "folderName": "random",
-  "folderUrl": "/randomMappa/"
+  "documentName": "Szuper doksi",
+  "mimeType": "docx",
+  "documentUrl": "/randomMappa/random/"
 }
 ###
 
 //módosítás
-PUT http://localhost:8080/folder
+PUT http://localhost:8080/document
 Content-Type: application/json
 
 {
@@ -32,5 +33,5 @@ Content-Type: application/json
 ###
 
 ## Delete by ID
-DELETE http://localhost:8080/folder/12
+DELETE http://localhost:8080/document/1
 Accept: application/json

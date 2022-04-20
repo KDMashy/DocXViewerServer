@@ -3,6 +3,7 @@ package docviewer.docxviewerserver.core.service;
 import docviewer.docxviewerserver.core.entity.CoreEntity;
 import docviewer.docxviewerserver.core.model.CoreDto;
 import docviewer.docxviewerserver.core.repository.CoreAbstractRepository;
+import docviewer.docxviewerserver.folder.entity.FolderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
@@ -17,8 +18,8 @@ public abstract class CoreAbstractService<D extends CoreDto, T extends CoreEntit
         return repository.findAll().stream().map(this::entityToDTO).collect(Collectors.toList());
     }
 
-    public D findById(Long id) {
-        return entityToDTO(repository.findById(id));
+    public T findById(Long id) {
+        return repository.findById(id);
     }
 
     @Transactional
@@ -26,6 +27,15 @@ public abstract class CoreAbstractService<D extends CoreDto, T extends CoreEntit
         repository.delete(id);
     }
 
+    @Transactional
+    public void deleteFolderWContents(Long id) {
+        repository.deleteFolderWContents(id);
+    }
+
+    @Transactional
+    public void deleteDocumentsWFolder(String name){
+        repository.deleteDocumentsWFolder(name);
+    }
 
     @Transactional
     public D save(D data) {

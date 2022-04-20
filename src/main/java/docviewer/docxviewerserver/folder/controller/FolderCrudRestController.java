@@ -1,5 +1,7 @@
 package docviewer.docxviewerserver.folder.controller;
 
+import docviewer.docxviewerserver.document.service.DocumentService;
+import docviewer.docxviewerserver.folder.entity.FolderEntity;
 import docviewer.docxviewerserver.folder.model.FolderDto;
 import docviewer.docxviewerserver.folder.service.FolderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import java.util.List;
 public class FolderCrudRestController {
     @Autowired
     private FolderService folderService;
+    @Autowired
+    private DocumentService documentService;
 
     @GetMapping()
     public ResponseEntity<List<FolderDto>> findAll() {
@@ -49,7 +53,9 @@ public class FolderCrudRestController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         try {
-            folderService.delete(id);
+            FolderEntity entity = folderService.findById(id);
+            folderService.deleteFolderWContents(id);
+            documentService.deleteDocumentsWFolder(entity.getFolderName());
             return ResponseEntity.ok("OK");
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nem található elem " + exception);

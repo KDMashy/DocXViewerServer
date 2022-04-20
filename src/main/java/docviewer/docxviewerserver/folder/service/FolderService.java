@@ -1,11 +1,15 @@
 package docviewer.docxviewerserver.folder.service;
 
 import docviewer.docxviewerserver.core.service.CoreAbstractService;
+import docviewer.docxviewerserver.document.entity.DocumentEntity;
+import docviewer.docxviewerserver.document.service.repository.DocumentRepository;
 import docviewer.docxviewerserver.folder.entity.FolderEntity;
 import docviewer.docxviewerserver.folder.model.FolderDto;
 import docviewer.docxviewerserver.folder.service.repository.FolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FolderService extends CoreAbstractService<FolderDto, FolderEntity> {
