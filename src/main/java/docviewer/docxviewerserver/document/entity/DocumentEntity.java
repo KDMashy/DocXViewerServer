@@ -1,6 +1,7 @@
 package docviewer.docxviewerserver.document.entity;
 
 import docviewer.docxviewerserver.core.entity.CoreEntity;
+import docviewer.docxviewerserver.folder.entity.FolderEntity;
 
 import javax.persistence.*;
 
@@ -19,6 +20,12 @@ public class DocumentEntity extends CoreEntity {
 
     @Column(name = "documentUrl")
     private String documentUrl;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "folder_id")
+    private Long folder_id;
 
     public Long getId() {
         return id;
