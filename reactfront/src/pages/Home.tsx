@@ -9,9 +9,8 @@ function Home() {
         <div className='defaultContainer'>
           <h1>Welcome to my folder and document viewer site</h1>
           <p>
-            Its basically a beginner made file system
+            Its basically a beginner made file system, needs login to be used
           </p>
-          <Link to="/folders"> Folders & Docs </Link>
         </div>
       </div>
     </div>
