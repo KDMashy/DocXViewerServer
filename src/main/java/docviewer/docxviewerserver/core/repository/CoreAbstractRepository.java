@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class CoreAbstractRepository <T extends CoreEntity> {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     public T save(T entity) {
         entityManager.persist(entity);

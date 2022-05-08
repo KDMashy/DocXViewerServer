@@ -46,8 +46,8 @@
 }
 
 .defaultContainer a:hover,
-.project .content a:hover,
-#projectCreate:hover {
+.thingContainer .content a:hover,
+#thingCreate:hover {
     background-color: rgba(114, 78, 0, 0.815);
     border-radius: 100px;
 }
@@ -62,7 +62,7 @@
     padding: 10px 0;
 }
 
-#projectCreate {
+#thingCreate {
     padding: 15px 50px;
     font-size: 125%;
     font-weight: bold;
@@ -75,7 +75,8 @@
     transition: background 0.3s, border-radius 0.3s;
 }
 
-.projectsContainer {
+.folderContainer,
+.documentContainer {
     text-align: center;
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.849);
@@ -84,7 +85,7 @@
     margin-top: 3%;
 }
 
-.project {
+.thingContainer {
     padding: 10px 50px;
     background-color: rgb(255, 255, 255);
     border-radius: 100px;
@@ -92,16 +93,16 @@
     margin-top: 25px;
 }
 
-.project .content {
+.thingContainer .content {
     display: flex;
     flex-direction: column;
 }
 
-.project .content span {
+.thingContainer .content span {
     padding: 10px 0;
 }
 
-.project .content a {
+.thingContainer .content a {
     padding: 10px 20%;
     background-color: rgba(228, 156, 0, 0.658);
     text-decoration: none;
@@ -160,14 +161,14 @@
         font-size: 100%;
     }
 
-    #projectCreate {
+    #thingCreate {
         padding: 15px 40px;
         font-size: 100%;
         font-weight: bold;
         margin-top: 20px;
     }
 
-    .project .content a {
+    .thingContainer .content a {
         font-size: 60%;
         width: 30%;
     }

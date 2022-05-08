@@ -6,7 +6,7 @@ import Folders from '../components/Folder';
 import '../styles/Main.css';
 
 export interface IFolder {
-  id?: number,
+  id: number,
   folderName: string,
   folderUrl: string,
   description: string,
@@ -14,7 +14,7 @@ export interface IFolder {
 }
 
 export interface IDocument {
-  id?: number,
+  id: number,
   documentName: string,
   documentUrl: string,
   mimeType: string
@@ -169,7 +169,7 @@ function FolderDocs() {
             name='folderColor'
             value={folderColor}
             onChange={handleChange}/>
-          <button className='projectCreate' onClick={addFolder}> Add folder </button>
+          <button className='thingCreate' onClick={addFolder}> Add folder </button>
         </div>
         <div className='defaultContainer'>
         <h1>Create document</h1>
@@ -191,7 +191,7 @@ function FolderDocs() {
             name='documentMimeType'
             value={docMymeType}
             onChange={handleChange}/>
-          <button className='projectCreate' onClick={addDocument}> Add document </button>
+          <button className='thingCreate' onClick={addDocument}> Add document </button>
         </div>
         <div className="folderContainer">
           <h2>Projects</h2>

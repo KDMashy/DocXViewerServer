@@ -5,12 +5,14 @@ import FolderDocs from './pages/FolderDocs';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import { Login } from '@mui/icons-material';
 import Cookies from 'universal-cookie';
 import Notfound from './pages/Notfound';
 import Profile from './pages/Profile';
+import Login from './pages/Login';
 
-const cookies = new Cookies();
+function App() {
+
+  const cookies = new Cookies();
 
   const [logged, setLogged] = useState(false);
 
@@ -23,7 +25,6 @@ const cookies = new Cookies();
     }
   });
 
-function App() {
   return (
     <div className="App">
       <Router>
