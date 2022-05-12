@@ -6,7 +6,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb2xkZXJEb
 ###
 
 ## Find by ID
-GET http://localhost:8080/folder/1
+GET http://localhost:8080/folder/57
 Accept: application/json
 
 ###
