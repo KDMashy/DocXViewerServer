@@ -1,6 +1,7 @@
 ## find all
 GET http://localhost:8080/folder
 Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb2xkZXJEb2NzIiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1LCJ1c2VybmFtZSI6InZhbGFraSJ9.UXvpSOAGd-y_gGrpAUR2sHkFgkvPv6u4aGZFULkSM6A
 
 ###
 
@@ -13,6 +14,7 @@ Accept: application/json
 //beszúrás
 POST http://localhost:8080/folder
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb2xkZXJEb2NzIiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1LCJ1c2VybmFtZSI6InZhbGFraSJ9.UXvpSOAGd-y_gGrpAUR2sHkFgkvPv6u4aGZFULkSM6A
 
 {
   "folderName": "random",

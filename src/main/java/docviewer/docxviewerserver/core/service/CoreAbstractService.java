@@ -2,8 +2,7 @@ package docviewer.docxviewerserver.core.service;
 
 import docviewer.docxviewerserver.core.entity.CoreEntity;
 import docviewer.docxviewerserver.core.model.CoreDto;
-import docviewer.docxviewerserver.core.repository.CoreAbstractRepository;
-import docviewer.docxviewerserver.folder.entity.FolderEntity;
+import docviewer.docxviewerserver.core.repository.CoreAbstractRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 
 public abstract class CoreAbstractService<D extends CoreDto, T extends CoreEntity> {
     @Autowired
-    protected CoreAbstractRepository<T> repository;
+    protected CoreAbstractRepositoryImpl<T> repository;
 
     public List<D> findAll() {
         return repository.findAll().stream().map(this::entityToDTO).collect(Collectors.toList());

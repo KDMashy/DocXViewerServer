@@ -3,7 +3,9 @@ package docviewer.docxviewerserver.user.security;
 import docviewer.docxviewerserver.user.entity.RoleEntity;
 import docviewer.docxviewerserver.user.entity.UserEntity;
 import docviewer.docxviewerserver.user.repository.RoleRepository;
+import docviewer.docxviewerserver.user.repository.RoleRepositoryImpl;
 import docviewer.docxviewerserver.user.repository.UserRepository;
+import docviewer.docxviewerserver.user.repository.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,8 +45,8 @@ public class UserAppInitConfig {
             UserEntity adminEntity = new UserEntity();
             adminEntity.setUsername("admin");
             adminEntity.setAuthorities(new ArrayList<>());
-            userEntity.getAuthorities().add(roleRepository.getByAuthorityName("ROLE_USER"));
-            userEntity.getAuthorities().add(roleRepository.getByAuthorityName("ROLE_ADMIN"));
+            adminEntity.getAuthorities().add(roleRepository.getByAuthorityName("ROLE_USER"));
+            adminEntity.getAuthorities().add(roleRepository.getByAuthorityName("ROLE_ADMIN"));
 
             adminEntity.setPassword(new BCryptPasswordEncoder().encode("admin"));
             userRepository.save(adminEntity);
