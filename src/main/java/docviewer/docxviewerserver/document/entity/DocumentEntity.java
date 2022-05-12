@@ -27,6 +27,22 @@ public class DocumentEntity extends CoreEntity {
     @Column(name = "folder_id")
     private Long folder_id;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getFolder_id() {
+        return folder_id;
+    }
+
+    public void setFolder_id(Long folder_id) {
+        this.folder_id = folder_id;
+    }
+
     public Long getId() {
         return id;
     }

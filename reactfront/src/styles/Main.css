@@ -47,9 +47,14 @@
 
 .defaultContainer a:hover,
 .thingContainer .content a:hover,
-#thingCreate:hover {
+.thingCreate:hover {
     background-color: rgba(114, 78, 0, 0.815);
     border-radius: 100px;
+}
+
+.thingDelete:hover {
+background-color: rgba(114, 8, 0, 0.815);
+border-radius: 100px;
 }
 
 .defaultContainer input{
@@ -62,7 +67,7 @@
     padding: 10px 0;
 }
 
-#thingCreate {
+.thingCreate {
     padding: 15px 50px;
     font-size: 125%;
     font-weight: bold;
@@ -73,6 +78,21 @@
     color: #fff;
     text-shadow: 2px 2px #000;
     transition: background 0.3s, border-radius 0.3s;
+}
+
+.thingDelete {
+    padding: 10px 25px;
+    font-size: 125%;
+    font-weight: bold;
+    transition: padding 0.3s, font-size 0.3s;
+    border-radius: 15px;
+    background-color: rgba(228, 46, 0, 0.658);
+    color: #fff;
+    text-shadow: 2px 2px #000;
+    transition: background 0.3s, border-radius 0.3s;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 40px;
 }
 
 .folderContainer,
@@ -140,6 +160,13 @@
     .defaultContainer a {
         font-size: 100%;
     }
+
+    .thingDelete {
+        padding: 15px 40px;
+        font-size: 100%;
+        font-weight: bold;
+        margin-top: 20px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -161,9 +188,16 @@
         font-size: 100%;
     }
 
-    #thingCreate {
+    .thingCreate {
         padding: 15px 40px;
         font-size: 100%;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .thingDelete {
+        padding: 15px 40px;
+        font-size: 75%;
         font-weight: bold;
         margin-top: 20px;
     }

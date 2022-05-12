@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@RequestMapping("document")
+@RequestMapping("/document")
 @RestController
 public class DocumentCrudRestController {
     @Autowired

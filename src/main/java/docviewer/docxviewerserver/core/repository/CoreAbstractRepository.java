@@ -15,6 +15,8 @@ public interface CoreAbstractRepository <T extends CoreEntity>{
 
     T findById(Long id);
 
+    T findByName(String username);
+
     @Transactional
     void delete(Long id);
 

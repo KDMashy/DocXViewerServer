@@ -17,6 +17,7 @@ const deleteFolder = async (id: number) => {
 }
 
 const Folders = ({ folder }: Props) => {
+    console.log(folder);
     return (
         <div className='thingContainer'>
             <div className='content'>

@@ -35,6 +35,14 @@ public abstract class CoreAbstractRepositoryImpl<T extends CoreEntity> implement
         return entity;
     }
 
+    public T findByName(String username) {
+        T entity = entityManager.find(getManagedClass(), username);
+        if (entity == null) {
+            throw new RuntimeException("entity with: " + username + " name was not found");
+        }
+        return entity;
+    }
+
     @Transactional
     public void delete(Long id) {
         entityManager.remove((findById(id)));

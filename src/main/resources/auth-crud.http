@@ -1,6 +1,24 @@
 ## find all
 POST http://localhost:8080/login
-Accept: application/json
-Authorization: Basic dmFsYWtpOnRlc3p0
+Content-Type: application/json
 
+{
+  "username": "valaki",
+  "password": "teszt"
+}
+
+###
+
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "username": "tesztelek",
+  "password": "mehh"
+}
+
+###
+GET http://localhost:8080/profile
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb2xkZXJEb2NzIiwiZXhwIjo5MjIzMzcyMDM2ODU0Nzc1LCJ1c2VybmFtZSI6InZhbGFraSJ9.UXvpSOAGd-y_gGrpAUR2sHkFgkvPv6u4aGZFULkSM6A
 ###

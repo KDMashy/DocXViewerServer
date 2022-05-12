@@ -7,19 +7,18 @@ import '../styles/Main.css';
 export interface IUser {
     id?: number,
     username: string,
-    email: string,
     password?: string
 }
 
 function Profile() {
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<string>();
 
   const cookies = new Cookies();
 
   const getProfile = async () => {
     var token = cookies.get('token');
     const resp = await axios.get(
-      'http://localhost:8080/user/profile', {
+      'http://localhost:8080/profile', {
         headers: {"Authorization": `Bearer ${token}`}
       }
     )
@@ -27,26 +26,24 @@ function Profile() {
   }
 
   const logout = async () => {
-    var token = cookies.get('token');
-    const resp = await axios.get('http://localhost:8080/auth/logout', {
-      headers: {"Authorization": `Bearer ${token}`}
-    })
-    
     cookies.set('token', '');
     cookies.set('loggedin', 'false');
+
+    setUser('');
 
     window.location.replace("http://localhost:3000/");
   }
 
-  getProfile();
+  useEffect(() => {
+    getProfile();
+  }, [])
 
   return (
     <div className='site'>
       <div className='maincontent'>
         <div className='defaultContainer'>
-          <h1>{user?.username}</h1>
-          <h1>{user?.email}</h1>
-          <button  className='projectCreate' onClick={logout}>LOGOUT</button>
+          <h1>{user}</h1>
+          <button  className='thingCreate' onClick={logout}>LOGOUT</button>
         </div>
       </div>
     </div>

@@ -18,7 +18,9 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb2xkZXJEb
 
 {
   "folderName": "random",
-  "folderUrl": "/randomMappa/"
+  "folderUrl": "/",
+  "description": "asd",
+  "color": "red"
 }
 ###
 

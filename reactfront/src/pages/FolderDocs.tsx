@@ -9,8 +9,8 @@ export interface IFolder {
   id: number,
   folderName: string,
   folderUrl: string,
-  description: string,
-  color: string
+  description?: string,
+  color?: string
 }
 
 export interface IDocument {
@@ -32,6 +32,7 @@ function FolderDocs() {
   const [docUrl, setDocUrl] = useState<string>('');
   const [docMymeType, setDocMymeType] = useState<string>('');
   const [logged, setLogged] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const cookies = new Cookies();
   var token = cookies.get('token');
@@ -42,10 +43,6 @@ function FolderDocs() {
       setFolderName(evt.target.value);
     } else if (evt.target.name === "folderUrl"){
       setFolderurl(evt.target.value);
-    } else if (evt.target.name === "folderDesc"){
-      setFolderDesc(evt.target.value);
-    } else if (evt.target.name === "folderColor"){
-      setFolderColor(evt.target.value)
     } else if (evt.target.name === "documentName"){
       setDocName(evt.target.value);
     } else if (evt.target.name === "documentUrl"){
@@ -62,49 +59,56 @@ function FolderDocs() {
       headers: {"Authorization": `Bearer ${token}`}
     })
     var opened: string = JSON.stringify(resp.data).replace('[','').replace(']','');
-    if (opened.length > 0) {
-      if(type === "folder"){
-        var listed: string[] = opened.split('},{');
-        listed.forEach(element => {
+     if (opened.length > 0) {
+       if(type === "folder"){
+         var listed: string[] = opened.split('},{');
+         console.log(listed)
+         listed.forEach(element => {
           if (element.startsWith('{') && element.endsWith('}')){
             getFolderList.push(JSON.parse(`${element}`));
+          } else if (element.startsWith('{')){
+            getFolderList.push(JSON.parse(`${element}}`));
+          } else if(element.endsWith('}')) {
+            getFolderList.push(JSON.parse(`{${element}`));
           } else {
-            if(element.startsWith('{')){
-              getFolderList.push(JSON.parse(`${element}}`));
-            } else {
-              getFolderList.push(JSON.parse(`{${element}`));
-            }
+            getFolderList.push(JSON.parse(`{${element}}`));
           }
-        });
-        var listedLength = listed.length;
-        if (listedLength != getFolderList.length){
-          for(var i = 0; i < (getFolderList.length/2); i++){
-            getFolderList.pop();
-          }
-        }
-        setFolderList(getFolderList);
-      } else if (type === "document") {
-        var listed: string[] = opened.split('},{');
-        listed.forEach(element => {
+         });
+         var listedLength = listed.length;
+         if (listedLength != getFolderList.length){
+           for(var i = 0; i < (getFolderList.length/2); i++){
+             getFolderList.pop();
+           }
+         }
+         setFolderList(getFolderList);
+       } else if (type === "document") {
+         var listed: string[] = opened.split('},{');
+         listed.forEach(element => {
           if (element.startsWith('{') && element.endsWith('}')){
             getDocumentList.push(JSON.parse(`${element}`));
+          } else if (element.startsWith('{')){
+            getDocumentList.push(JSON.parse(`${element}}`));
+          } else if(element.endsWith('}')) {
+            getDocumentList.push(JSON.parse(`{${element}`));
           } else {
-            if(element.startsWith('{')){
-              getDocumentList.push(JSON.parse(`${element}}`));
-            } else {
-              getDocumentList.push(JSON.parse(`{${element}`));
-            }
+            getDocumentList.push(JSON.parse(`{${element}}`));
           }
-        });
-        var listedLength = listed.length;
-        if (listedLength != getDocumentList.length){
-          for(var i = 0; i < (getDocumentList.length/2); i++){
-            getDocumentList.pop();
-          }
-        }
-        setDocumentList(getDocumentList);
-      }
-    }
+         });
+         var listedLength = listed.length;
+         if (listedLength != getDocumentList.length){
+           for(var i = 0; i < (getDocumentList.length/2); i++){
+             getDocumentList.pop();
+           }
+         }
+         setDocumentList(getDocumentList);
+       }
+     }
+  }
+
+  if(loaded == false){
+    getAll('folder');
+    getAll('document');
+    setLoaded(true);
   }
 
   useEffect(() => {
@@ -113,16 +117,12 @@ function FolderDocs() {
     } else {
       setLogged(false);
     }
-    getAll('folder');
-    getAll('document');
-  }, [1]);
+  }, []);
 
   const addFolder = async () => {
     await axios.post('http://localhost:8080/folder', {
       folderName: folderName,
-      folderUrl: folderUrl,
-      description: folderDesc,
-      color: folderColor
+      folderUrl: folderUrl
     }, {
       headers: {"Authorization": `Bearer ${token}`}
     })
@@ -157,50 +157,38 @@ function FolderDocs() {
             name='folderUrl'
             value={folderUrl}
             onChange={handleChange}/>
-          <input 
-            type='text'
-            placeholder='Folder description'
-            name='folderDesc'
-            value={folderDesc}
-            onChange={handleChange}/>
-          <input 
-            type='text'
-            placeholder='Folder color'
-            name='folderColor'
-            value={folderColor}
-            onChange={handleChange}/>
           <button className='thingCreate' onClick={addFolder}> Add folder </button>
         </div>
         <div className='defaultContainer'>
         <h1>Create document</h1>
           <input 
             type='text'
-            placeholder='Folder name'
+            placeholder='Document name'
             name='documentName'
             value={docName}
             onChange={handleChange} />
           <input 
             type='text'
-            placeholder='Folder url'
+            placeholder='Document url'
             name='documentUrl'
             value={docUrl}
             onChange={handleChange}/>
           <input 
             type='text'
-            placeholder='Folder description'
+            placeholder='Document mimeType'
             name='documentMimeType'
             value={docMymeType}
             onChange={handleChange}/>
           <button className='thingCreate' onClick={addDocument}> Add document </button>
         </div>
         <div className="folderContainer">
-          <h2>Projects</h2>
+          <h2>Folders</h2>
           {folderList.map((folder: IFolder, key: number) => {
             return <Folders key={key} folder={folder} />;
           })}
         </div>
         <div className="documentContainer">
-          <h2>Projects</h2>
+          <h2>Documents</h2>
           {documentList.map((document: IDocument, key: number) => {
             return <Documents key={key} document={document} />;
           })}

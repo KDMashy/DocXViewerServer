@@ -19,43 +19,39 @@ function Login() {
   var passwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
   function checkIfReg() {
-    if(!emailRegex.test(email)){
-      setMessage('User email is not correct format');
-    }
-    if(!passwRegex.test(password)){
-      setMessage(`User password is not correct, should contain: uppercase letter,  lowercase letter, special case letter, digits, and minimum length of 8`);
-    }
-    if(emailRegex.test(email) && passwRegex.test(password)){
-      setMessage('');
-    }
-  }
-
-  function checkIf() {
-    if(!passwRegex.test(loginPassw)){
-      setLoginMessage(`User password is not correct, should contain: uppercase letter,  lowercase letter, special case letter, digits, and minimum length of 8`);
-    }
-    if(passwRegex.test(loginPassw)){
-      setLoginMessage('');
-    }
+    // if(!passwRegex.test(password)){
+    //   setMessage(`User password is not correct, should contain: uppercase letter,  lowercase letter, special case letter, digits, and minimum length of 8`);
+    // }
+    // if(emailRegex.test(email) && passwRegex.test(password)){
+    //   setMessage('');
+    // }
   }
 
   const register = async () => {
     setEmail(email.toLowerCase());
-    const respReg = await axios.post('http://localhost:8080/user/register', {
+    const respReg = await axios.post('http://localhost:8080/register', {
       username: username,
-      email: email,
       password: password
     });
+
+    if(respReg){
+      const resp = await axios.post('http://localhost:8080/login', {
+        username: username,
+        password: password
+      })
+      var token = resp.data;
+      cookies.set('token', token, {path: '/'});
+      cookies.set('loggedin', "true", {path: '/'});
+    }
   }
 
   const login = async () => {
-    const resp = await axios.post('http://localhost:8080/auth/login', {
+    const resp = await axios.post('http://localhost:8080/login', {
       username: loginName,
       password: loginPassw
     })
-
-    var token = JSON.stringify(resp.data).replace('}', '').split(':');
-    cookies.set('token', token[1], {path: '/'});
+    var token = resp.data;
+    cookies.set('token', token, {path: '/'});
     cookies.set('loggedin', "true", {path: '/'});
   }
 
@@ -73,14 +69,6 @@ function Login() {
                 }}
               />
               <input 
-                type='email'
-                placeholder='Email...'
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  checkIfReg();
-                }}
-              />
-              <input 
                 type='password'
                 placeholder='Password...'
                 onChange={(e) => {
@@ -92,7 +80,7 @@ function Login() {
               <button className='thingCreate' onClick={async (e) => {
                 e.preventDefault();
                 await register();
-                window.location.replace("http://localhost:3000/register");
+                window.location.replace("http://localhost:3000/profile");
               }}>REGISTER</button>
             </div>
         </div>
@@ -111,10 +99,8 @@ function Login() {
                 placeholder='Password...'
                 onChange={(e) => {
                   setLoginPassw(e.target.value);
-                  checkIf();
                 }}
               />
-              <p style={{color: 'red', fontSize: '125%', fontWeight: 'bold'}}>{loginMessage}</p>
               <button className='thingCreate' onClick={async (e) => {
                 e.preventDefault();
                 await login();
