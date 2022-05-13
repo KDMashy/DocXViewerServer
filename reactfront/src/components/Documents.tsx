@@ -23,6 +23,7 @@ const Documents = ({ document }: Props) => {
                 <span>{document.documentName}</span>
                 <span>{document.documentUrl}</span>
                 <span>{document.mimeType}</span>
+                <span>{document.description}</span>
                 <button className='thingDelete' onClick={() => {
                     deleteDocument(document.id);
                 }}> Delete </button>

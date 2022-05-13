@@ -17,7 +17,8 @@ export interface IDocument {
   id: number,
   documentName: string,
   documentUrl: string,
-  mimeType: string
+  mimeType: string,
+  description: string
 }
 
 function FolderDocs() {
@@ -31,6 +32,7 @@ function FolderDocs() {
   const [docName, setDocName] = useState<string>('');
   const [docUrl, setDocUrl] = useState<string>('');
   const [docMymeType, setDocMymeType] = useState<string>('');
+  const [docDescription, setDocDescriptipon] = useState<string>('');
   const [logged, setLogged] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -43,12 +45,18 @@ function FolderDocs() {
       setFolderName(evt.target.value);
     } else if (evt.target.name === "folderUrl"){
       setFolderurl(evt.target.value);
+    } else if (evt.target.name === "folderDesc") {
+      setFolderDesc(evt.target.value);
+    } else if (evt.target.name === "folderColor") {
+      setFolderColor(evt.target.value);
     } else if (evt.target.name === "documentName"){
       setDocName(evt.target.value);
     } else if (evt.target.name === "documentUrl"){
       setDocUrl(evt.target.value);
     } else if (evt.target.name === "documentMimeType"){
       setDocMymeType(evt.target.value)
+    } else if (evt.target.name === "documentDesc") {
+      setDocDescriptipon(evt.target.value);
     }
   };
 
@@ -122,7 +130,9 @@ function FolderDocs() {
   const addFolder = async () => {
     await axios.post('http://localhost:8080/folder', {
       folderName: folderName,
-      folderUrl: folderUrl
+      folderUrl: folderUrl,
+      description: folderDesc,
+      color: folderColor
     }, {
       headers: {"Authorization": `Bearer ${token}`}
     })
@@ -133,7 +143,8 @@ function FolderDocs() {
     await axios.post('http://localhost:8080/document', {
       documentName: docName,
       documentUrl: docUrl,
-      mimeType: docMymeType
+      mimeType: docMymeType,
+      description: docDescription
     }, {
       headers: {"Authorization": `Bearer ${token}`}
     })
@@ -157,6 +168,18 @@ function FolderDocs() {
             name='folderUrl'
             value={folderUrl}
             onChange={handleChange}/>
+          <input 
+            type='text'
+            placeholder='Folder description'
+            name='folderDesc'
+            value={folderDesc}
+            onChange={handleChange}/>
+          <input 
+            type='text'
+            placeholder='Folder color'
+            name='folderColor'
+            value={folderColor}
+            onChange={handleChange}/>
           <button className='thingCreate' onClick={addFolder}> Add folder </button>
         </div>
         <div className='defaultContainer'>
@@ -178,6 +201,12 @@ function FolderDocs() {
             placeholder='Document mimeType'
             name='documentMimeType'
             value={docMymeType}
+            onChange={handleChange}/>
+          <input 
+            type='text'
+            placeholder='Document description'
+            name='documentDesc'
+            value={docDescription}
             onChange={handleChange}/>
           <button className='thingCreate' onClick={addDocument}> Add document </button>
         </div>

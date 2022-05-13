@@ -7,6 +7,15 @@ public class DocumentDto implements CoreDto {
     private String documentName;
     private String mimeType;
     private String documentUrl;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Long getId() {
         return id;

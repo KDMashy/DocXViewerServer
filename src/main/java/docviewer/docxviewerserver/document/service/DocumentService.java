@@ -26,6 +26,7 @@ public class DocumentService extends CoreAbstractService<DocumentDto, DocumentEn
         dto.setDocumentName(entity.getDocumentName());
         dto.setMimeType(entity.getMimeType());
         dto.setDocumentUrl(entity.getDocumentUrl());
+        dto.setDescription(entity.getDescription());
         return dto;
     }
 
@@ -34,5 +35,6 @@ public class DocumentService extends CoreAbstractService<DocumentDto, DocumentEn
         entity.setDocumentName(dto.getDocumentName());
         entity.setMimeType(dto.getMimeType());
         entity.setDocumentUrl(dto.getDocumentUrl());
+        entity.setDescription(dto.getDescription());
     }
 }

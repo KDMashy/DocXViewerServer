@@ -28,6 +28,8 @@ public class FolderService extends CoreAbstractService<FolderDto, FolderEntity> 
         dto.setId(entity.getId());
         dto.setFolderName(entity.getFolderName());
         dto.setFolderUrl(entity.getFolderUrl());
+        dto.setDescription(entity.getDescription());
+        dto.setColor(entity.getColor());
         return dto;
     }
 
@@ -35,5 +37,7 @@ public class FolderService extends CoreAbstractService<FolderDto, FolderEntity> 
     protected void populateDTODataToEntity(FolderDto dto, FolderEntity entity) {
         entity.setFolderName(dto.getFolderName());
         entity.setFolderUrl(dto.getFolderUrl());
+        entity.setDescription(dto.getDescription());
+        entity.setColor(dto.getColor());
     }
 }
